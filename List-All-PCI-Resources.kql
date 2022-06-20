@@ -1,0 +1,9 @@
+// List resources with a specific tag value
+// 
+// Filtering for resources with a tag name of 'env' that have a value of 'pci'. You can change these to any desired tag key and value.
+// The '=~' in the 'type' match tells Resource Graph to be case insensitive
+// The tag key is case sensitive. 'Env' and 'env' will give different results
+// 
+Resources
+| where tags.env=~'pci'
+| project name
