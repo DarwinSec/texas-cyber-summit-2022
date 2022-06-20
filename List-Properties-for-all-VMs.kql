@@ -1,0 +1,9 @@
+// This query lists key Virtual Machine properties including OS version and OS type.
+Resources
+| where type == "microsoft.compute/virtualmachines"
+| extend vmName = properties.osProfile.computerName
+| extend osOffer = properties.storageProfile.imageReference.offer
+| extend osSku = properties.storageProfile.imageReference.sku
+| extend osName = properties.extended.instanceView.osName
+| extend osVersion = properties.extended.instanceView.osVersion
+| project name, resourceGroup, location, vmName, osOffer, osSku, osName, osVersion
