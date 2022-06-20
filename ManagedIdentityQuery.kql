@@ -1,0 +1,8 @@
+// List resources with a specific user-assigned managed identity
+// 
+// A user-assigned managed identity - https://aka.ms/managedidentity can be assigned to one or more Azure resources.
+// This query lists all the Azure resources to which a specified user-assigned identity (identified using its Azure resource Id) is assigned to that you have access to.
+// This query can be helpful in the event that a user-assigned managed identity is compromised and you'd like to assess and quickly limit the blast radius.
+//
+Resources 
+| where identity has '/subscriptions/<subscription-id>/resourceGroups/<ResourceGroupName>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<ManagedIdentityName>'
