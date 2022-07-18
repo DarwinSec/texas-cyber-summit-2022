@@ -1,2 +1,1 @@
-# Supporting Material from my fwd:sec Presentation on Azure Resource Graph
-
+# Supporting Material for my fwd:cloudsec Presentation on Azure Resource Graph
