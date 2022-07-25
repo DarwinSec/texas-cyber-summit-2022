@@ -1,0 +1,6 @@
+Resources
+| where type == "microsoft.storage/storageaccounts"
+| where tostring(properties.allowBlobPublicAccess) == "true"
+| where tags.environment=~'production' 
+| where tags.datatype=~'GDPR'
+| where location !in ('uksouth', 'westeurope', 'norwayeast') 
