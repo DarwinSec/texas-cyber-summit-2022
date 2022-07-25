@@ -1,0 +1,23 @@
+Resources
+| where type =~ 'microsoft.compute/virtualmachines'
+| extend nics=array_length(properties.networkProfile.networkInterfaces) 
+| extend tostring(properties.storageProfile.osDisk.osType)
+| extend tostring(properties.storageProfile.imageReference.offer)
+| extend tostring(properties.storageProfile.imageReference.exactVersion)
+| mv-expand nic=properties.networkProfile.networkInterfaces
+| where nics == 1 or nic.properties.primary =~ 'true' or isempty(nic)
+| project subscriptionId, vmName = name, vmSize=tostring(properties.hardwareProfile.vmSize), nicId = tostring(nic.id), osType = tostring(properties.storageProfile.osDisk.osType), operatingSystem = tostring(properties.storageProfile.imageReference.offer), imageVersion = tostring(properties.storageProfile.imageReference.exactVersion)
+| join kind=leftouter (
+Resources
+| where type =~ 'microsoft.network/networkinterfaces'
+| extend ipConfigsCount=array_length(properties.ipConfigurations)
+| mv-expand ipconfig=properties.ipConfigurations
+| where ipConfigsCount == 1 or ipconfig.properties.primary =~ 'true'
+| project nicId = id, publicIpId = tostring(ipconfig.properties.publicIPAddress.id)) on nicId
+| project-away nicId1
+| summarize by subscriptionId, vmName, vmSize, nicId, publicIpId, osType, operatingSystem, imageVersion
+| join kind=leftouter (
+Resources
+| where type =~ 'microsoft.network/publicipaddresses'
+| project publicIpId = id, publicIpAddress = properties.ipAddress) on publicIpId
+| project-away publicIpId1
