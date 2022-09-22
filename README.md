@@ -1,2 +1,3 @@
-# Supporting Material for my fwd:cloudsec Presentation on How to Leverage Azure Resource Graph for Good and for Evil
-![image](https://user-images.githubusercontent.com/58404443/180698770-0c7d9967-2ae5-4e3a-9a12-4ebb57cc8836.png)
+# Supporting Material for my Texas Cyber Summit Presentation on How to Leverage Azure Resource Graph for Good and for Evil
+
+![TCS_2022N-1024x994](https://user-images.githubusercontent.com/58404443/191870434-e9f8e784-01d6-4917-abd1-9aa736ecd9bd.png)
