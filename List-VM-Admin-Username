@@ -1,0 +1,3 @@
+resources
+| where type == "microsoft.compute/virtualmachines"
+| extend tostring(properties.osProfile.adminUsername)
